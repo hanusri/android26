@@ -21,7 +21,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:5.2.1'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath 'org.ysb33r.gradle:ivypot:0.3.7'
 
         // NOTE: Do not place your application dependencies here; they belong
