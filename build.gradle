@@ -1,0 +1,65 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+// Need to update the saved dependencies for this test?
+//
+// 1. Uncomment remote repositories defined below.
+// 2. Run ./gradlew syncRemoteRepositories (changes will go into libs folder)
+// 3. Commit the differences
+
+buildscript {
+    repositories {
+        // Uncomment below if you're re-syncing repositories for new dependencies
+//        jcenter()
+//        google()
+//        maven {
+//            url 'https://plugins.gradle.org/m2/'
+//        }
+        ivy {
+            url "file://${rootProject.projectDir}/libs"
+            layout 'ivy'
+        }
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'org.ysb33r.gradle:ivypot:0.3.7'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        // Uncomment below if you're re-syncing repositories for new dependencies
+        jcenter()
+        google()
+        ivy {
+            url "file://${rootProject.projectDir}/libs"
+            layout 'ivy'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+apply plugin: 'org.ysb33r.ivypot'
+syncRemoteRepositories {
+    repoRoot "${rootProject.projectDir}/libs"
+
+    repositories {
+        jcenter()
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+        mavenCentral()
+        mavenLocal()
+    }
+
+    configurations 'compile', 'testCompile'
+
+    includeBuildScriptDependencies = true
+}
+

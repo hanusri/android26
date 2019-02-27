@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo 'Inside Android Source Directory'
+      - chmod +x ./codebuild_retry ./gradlew
+  build:
+    commands:
+      - echo 'Compiling the Android Project'
+      - ./codebuild_retry ./gradlew build --info --offline
+artifacts:
+  type: zip
+  files:
+    - '**/*'
+  base-directory: app/build/outputs/apk
